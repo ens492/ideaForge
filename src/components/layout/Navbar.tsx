@@ -8,6 +8,13 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { currentStage } = useAppContext();
 
+  // Function to handle navigation to current stage
+  const handleNavigateToCurrentStage = () => {
+    // Create and dispatch a custom event to switch to the journey view
+    const event = new CustomEvent('switchToJourney', { detail: currentStage });
+    window.dispatchEvent(event);
+  };
+
   return (
     <div className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,14 +30,24 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center">
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="text-gray-700">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-700"
+                onClick={handleNavigateToCurrentStage}
+              >
                 <CalendarCheck className="mr-2 h-4 w-4" />
                 My Journey
               </Button>
               <Button variant="outline" size="sm" className="text-gray-700">
                 Resources
               </Button>
-              <Button variant="default" size="sm" className="bg-idea-600 hover:bg-idea-700">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="bg-idea-600 hover:bg-idea-700"
+                onClick={handleNavigateToCurrentStage}
+              >
                 Current Stage: {currentStage.charAt(0).toUpperCase() + currentStage.slice(1)}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -77,6 +94,11 @@ export const Navbar = () => {
           <a
             href="#"
             className="block pl-3 pr-4 py-2 border-l-4 border-idea-500 text-base font-medium text-idea-700 bg-idea-50"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavigateToCurrentStage();
+              setIsMenuOpen(false);
+            }}
           >
             My Journey
           </a>
@@ -89,6 +111,11 @@ export const Navbar = () => {
           <a
             href="#"
             className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavigateToCurrentStage();
+              setIsMenuOpen(false);
+            }}
           >
             Current Stage: {currentStage.charAt(0).toUpperCase() + currentStage.slice(1)}
           </a>
