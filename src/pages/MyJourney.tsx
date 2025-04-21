@@ -1,81 +1,69 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
-import { AppProvider } from "@/context/AppContext";
-import { useAppContext } from "@/context/AppContext";
+import { AppProvider, useAppContext } from "@/context/AppContext";
+import { STAGES, Stage } from "@/types";
+import { StageView } from "@/components/stages/StageView";
 import { JourneyProgress } from "@/components/journey/JourneyProgress";
 import { JourneyStages } from "@/components/journey/JourneyStages";
 import { JourneyInsights } from "@/components/journey/JourneyInsights";
 import { JourneyActions } from "@/components/journey/JourneyActions";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { toast } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const JourneyView = () => {
-  const { progress, currentStage } = useAppContext();
-  const [selectedStage, setSelectedStage] = useState(currentStage);
-  
-  // Calculate overall progress
-  const totalStages = 7; // Total number of stages
-  const completedCount = progress.completedStages.length;
-  const progressPercentage = Math.round((completedCount / totalStages) * 100);
-  
-  const handleDownloadReport = () => {
-    // This would be implemented with a PDF generation library in a real application
-    toast.success("Journey report download started", {
-      description: "Your innovation journey report is being generated."
-    });
-  };
-
-  return (
-    <div className="space-y-8 max-w-6xl mx-auto">
-      {/* Header with progress overview */}
-      <Card>
-        <CardHeader>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <CardTitle className="text-2xl font-bold text-idea-700">My Innovation Journey</CardTitle>
-              <CardDescription className="mt-1">
-                Track your progress through the 7 stages of innovation design thinking
-              </CardDescription>
-            </div>
-            <Button onClick={handleDownloadReport} className="ml-auto">
-              <Download className="mr-2 h-4 w-4" />
-              Download Report
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <JourneyProgress 
-            progressPercentage={progressPercentage} 
-            selectedStage={selectedStage}
-            setSelectedStage={setSelectedStage}
-          />
-        </CardContent>
-      </Card>
-      
-      {/* Stage details */}
-      <JourneyStages selectedStage={selectedStage} setSelectedStage={setSelectedStage} />
-      
-      {/* Reflection insights */}
-      <JourneyInsights />
-      
-      {/* Next actions */}
-      <JourneyActions />
-    </div>
-  );
-};
-
-// Main Journey page component with AppProvider
+// The main journey page that shows the user's innovation journey
 const MyJourney = () => {
+  const { progress, currentStage } = useAppContext();
+  const [selectedStage, setSelectedStage] = useState<Stage>(currentStage);
+  
+  // Calculate overall progress percentage
+  const totalStages = STAGES.length;
+  const completedStages = progress.completedStages.length;
+  const progressPercentage = Math.round((completedStages / totalStages) * 100);
+
   return (
-    <AppProvider>
-      <MainLayout>
-        <JourneyView />
-      </MainLayout>
-    </AppProvider>
+    <MainLayout>
+      <div className="space-y-8">
+        {/* Progress Tracker */}
+        <Card>
+          <CardContent className="pt-6">
+            <JourneyProgress 
+              progressPercentage={progressPercentage}
+              selectedStage={selectedStage}
+              setSelectedStage={setSelectedStage}
+            />
+          </CardContent>
+        </Card>
+        
+        {/* Main Content Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Stage Navigator */}
+          <div className="lg:col-span-1 space-y-8">
+            <JourneyStages 
+              selectedStage={selectedStage}
+              setSelectedStage={setSelectedStage}
+            />
+            
+            <JourneyInsights />
+            
+            <JourneyActions />
+          </div>
+          
+          {/* Right Column - Stage Content */}
+          <div className="lg:col-span-2">
+            <StageView stage={selectedStage} />
+          </div>
+        </div>
+      </div>
+    </MainLayout>
   );
 };
 
-export default MyJourney;
+// Wrap the component with the AppProvider to ensure context is available
+const WrappedMyJourney = () => (
+  <AppProvider>
+    <MyJourney />
+  </AppProvider>
+);
+
+export default WrappedMyJourney;

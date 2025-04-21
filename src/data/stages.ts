@@ -168,7 +168,7 @@ export const stageContent: Record<Stage, StageContent> = {
         id: "article-5",
         title: "Crafting a Strong Problem Statement",
         description: "How to write a problem statement that drives innovation.",
-        url: "#",
+        url: "#pov",
         type: "article"
       },
       {
@@ -177,27 +177,55 @@ export const stageContent: Record<Stage, StageContent> = {
         description: "Methods for synthesizing research data into actionable insights.",
         url: "#",
         type: "pdf"
+      },
+      {
+        id: "article-7",
+        title: "How Might We Questions",
+        description: "Transform problem statements into opportunity questions.",
+        url: "#hmw",
+        type: "template"
+      },
+      {
+        id: "article-8",
+        title: "Vision Cone Framework",
+        description: "Define immediate, mid-term, and long-term vision for your idea.",
+        url: "#visioncone",
+        type: "template"
+      },
+      {
+        id: "article-9",
+        title: "Context Mapping Guide",
+        description: "Tools for uncovering the broader context influencing user behavior.",
+        url: "#contextmapping",
+        type: "article"
       }
     ],
     reflectionQuestions: [
       {
         id: "define-q1",
-        question: "What is your problem statement? (Format: [User] needs to [user's need] because [insight])",
-        placeholder: "Write your problem statement...",
-        type: "textarea",
+        question: "Describe your target user in one clear sentence",
+        placeholder: "e.g., A busy working parent with young children",
+        type: "text",
         required: true
       },
       {
         id: "define-q2",
-        question: "How does this problem statement reflect the needs and insights you discovered?",
-        placeholder: "Explain how your problem statement connects to your research...",
-        type: "textarea",
+        question: "What is this user's biggest need?",
+        placeholder: "e.g., To prepare nutritious meals quickly and easily",
+        type: "text",
         required: true
       },
       {
         id: "define-q3",
-        question: "What constraints or requirements must any solution address?",
-        placeholder: "List key constraints and requirements...",
+        question: "What's the main barrier keeping them from fulfilling this need?",
+        placeholder: "e.g., Limited time between work and family responsibilities",
+        type: "text",
+        required: true
+      },
+      {
+        id: "define-q4",
+        question: "Complete the POV template: [User] is experiencing [problem] because [cause/insight]",
+        placeholder: "e.g., A busy working parent is experiencing difficulty providing nutritious meals for their family because they have limited time between work and family responsibilities.",
         type: "textarea",
         required: true
       }
@@ -206,14 +234,26 @@ export const stageContent: Record<Stage, StageContent> = {
       {
         id: "define-task1",
         title: "Analyze research findings",
-        description: "Review all the data you've collected and identify patterns, tensions, and surprises.",
+        description: "Review the data from your 'Understand' and 'Observe' stages and identify patterns, tensions, and surprises.",
         required: true
       },
       {
         id: "define-task2",
-        title: "Create user personas",
-        description: "Develop 1-2 personas that represent your key user groups and their needs.",
+        title: "Create a user persona",
+        description: "Develop a detailed persona that represents your key user group and their needs.",
         required: true
+      },
+      {
+        id: "define-task3",
+        title: "Map the context",
+        description: "Document the environmental, emotional, and relational factors influencing your user's experience.",
+        required: false
+      },
+      {
+        id: "define-task4",
+        title: "Draft HMW questions",
+        description: "Transform your POV statement into at least 3 'How Might We' questions for ideation.",
+        required: false
       }
     ]
   },

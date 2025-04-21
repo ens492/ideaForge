@@ -3,6 +3,7 @@ import React from "react";
 import { Stage } from "@/types";
 import { useAppContext } from "@/context/AppContext";
 import { StageContent } from "./StageContent";
+import { StageDefine } from "./StageDefine";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock } from "lucide-react";
 
@@ -54,5 +55,11 @@ export const StageView: React.FC<StageViewProps> = ({ stage }) => {
     );
   }
 
-  return <StageContent stage={stage} />;
+  // Return the appropriate stage content based on the stage
+  switch (stage) {
+    case "define":
+      return <StageDefine />;
+    default:
+      return <StageContent stage={stage} />;
+  }
 };
