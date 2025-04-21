@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { Button } from "@/components/ui/button";
@@ -12,10 +11,10 @@ export const Navbar = () => {
 
   // Function to handle navigation to current stage
   const handleNavigateToCurrentStage = () => {
-    // Navigate to the dedicated journey page
+    // Navigate to the journey page first
     navigate('/journey');
     
-    // Create and dispatch a custom event to switch to the journey view with current stage
+    // Create and dispatch a custom event to switch to the current stage view
     setTimeout(() => {
       const event = new CustomEvent('switchToJourney', { detail: currentStage });
       window.dispatchEvent(event);

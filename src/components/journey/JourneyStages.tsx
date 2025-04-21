@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { STAGES, STAGE_NAMES, STAGE_DESCRIPTIONS, Stage } from "@/types";
 import { format } from "date-fns";
@@ -25,8 +24,21 @@ interface JourneyStagesProps {
 }
 
 export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStagesProps) => {
-  const { progress, isStageCompleted, isStageAccessible } = useAppContext();
+  const { progress, currentStage } = useAppContext();
   
+  useEffect(() => {
+    const handleSwitchToJourney = (event: CustomEvent) => {
+      const stageToShow = event.detail as Stage;
+      setSelectedStage(stageToShow);
+    };
+
+    window.addEventListener('switchToJourney', handleSwitchToJourney as EventListener);
+
+    return () => {
+      window.removeEventListener('switchToJourney', handleSwitchToJourney as EventListener);
+    };
+  }, [setSelectedStage]);
+
   return (
     <Card>
       <CardHeader>
@@ -43,7 +55,7 @@ export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStages
           collapsible
         >
           {STAGES.map((stage) => {
-            const isCompleted = isStageCompleted(stage);
+            const isCompleted = progress.submissions[stage]?.completed;
             const isAccessible = isStageAccessible(stage);
             const stageSubmission = progress.submissions[stage];
             
@@ -55,7 +67,7 @@ export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStages
                 className={cn(
                   "border rounded-lg mb-4 overflow-hidden",
                   isCompleted ? "border-green-200" : 
-                    progress.currentStage === stage ? "border-idea-200" : 
+                    currentStage === stage ? "border-idea-200" : 
                     "border-gray-200",
                   !isAccessible && "opacity-60"
                 )}
@@ -65,7 +77,7 @@ export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStages
                     <div className={cn(
                       "flex h-8 w-8 items-center justify-center rounded-full mr-3",
                       isCompleted ? "bg-green-100 text-green-600" : 
-                        progress.currentStage === stage ? "bg-idea-100 text-idea-600" : 
+                        currentStage === stage ? "bg-idea-100 text-idea-600" : 
                         isAccessible ? "bg-gray-100 text-gray-500" : 
                         "bg-gray-100 text-gray-400"
                     )}>
@@ -89,7 +101,7 @@ export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStages
                       </Badge>
                     )}
                     
-                    {progress.currentStage === stage && !isCompleted && (
+                    {currentStage === stage && !isCompleted && (
                       <Badge variant="outline" className="ml-auto mr-2 bg-idea-50 text-idea-600 border-idea-200">
                         In Progress
                       </Badge>
