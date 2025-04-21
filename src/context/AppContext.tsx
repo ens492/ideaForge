@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Stage, STAGES, UserProgress, UserSubmission, AIFeedback } from "@/types";
 
@@ -120,7 +121,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const { generateAIFeedback } = await import('@/services/aiFeedback');
       
       // Get feedback from our AI service
-      const feedback = await generateAIFeedback(stage, submission.answers);
+      const feedbackResult = await generateAIFeedback(stage, submission.answers);
+      
+      // Create proper AIFeedback object with required fields
+      const feedback: AIFeedback = {
+        id: `feedback-${Date.now()}`,
+        createdAt: new Date(),
+        positiveFeedback: feedbackResult.positiveFeedback,
+        constructiveFeedback: feedbackResult.constructiveFeedback,
+        suggestions: feedbackResult.suggestions,
+        approved: feedbackResult.approved
+      };
       
       // Update the submission with feedback
       updateSubmission(stage, { 
