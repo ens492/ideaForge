@@ -3,16 +3,23 @@ import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { Button } from "@/components/ui/button";
 import { CalendarCheck, Layers, ArrowRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { currentStage } = useAppContext();
+  const navigate = useNavigate();
 
   // Function to handle navigation to current stage
   const handleNavigateToCurrentStage = () => {
-    // Create and dispatch a custom event to switch to the journey view
-    const event = new CustomEvent('switchToJourney', { detail: currentStage });
-    window.dispatchEvent(event);
+    // Navigate to the dedicated journey page
+    navigate('/journey');
+    
+    // Create and dispatch a custom event to switch to the journey view with current stage
+    setTimeout(() => {
+      const event = new CustomEvent('switchToJourney', { detail: currentStage });
+      window.dispatchEvent(event);
+    }, 100); // Small delay to ensure the page has loaded
   };
 
   return (
@@ -21,10 +28,10 @@ export const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo and Title */}
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex-shrink-0 flex items-center">
               <Layers className="h-8 w-8 text-idea-600" />
               <span className="ml-2 text-xl font-semibold text-gray-900">Idea Forge</span>
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -34,10 +41,12 @@ export const Navbar = () => {
                 variant="ghost" 
                 size="sm" 
                 className="text-gray-700"
-                onClick={handleNavigateToCurrentStage}
+                asChild
               >
-                <CalendarCheck className="mr-2 h-4 w-4" />
-                My Journey
+                <Link to="/journey">
+                  <CalendarCheck className="mr-2 h-4 w-4" />
+                  My Journey
+                </Link>
               </Button>
               <Button variant="outline" size="sm" className="text-gray-700">
                 Resources
@@ -91,17 +100,13 @@ export const Navbar = () => {
       {/* Mobile menu */}
       <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="pt-2 pb-3 space-y-1">
-          <a
-            href="#"
+          <Link
+            to="/journey"
             className="block pl-3 pr-4 py-2 border-l-4 border-idea-500 text-base font-medium text-idea-700 bg-idea-50"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigateToCurrentStage();
-              setIsMenuOpen(false);
-            }}
+            onClick={() => setIsMenuOpen(false)}
           >
             My Journey
-          </a>
+          </Link>
           <a
             href="#"
             className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
