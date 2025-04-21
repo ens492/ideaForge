@@ -1,4 +1,3 @@
-
 import { useAppContext } from "@/context/AppContext";
 import { STAGES, STAGE_NAMES, Stage } from "@/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +8,13 @@ import { Check, ArrowRight, Clock } from "lucide-react";
 
 export const Dashboard = () => {
   const { progress, setCurrentStage, isStageCompleted, isStageAccessible } = useAppContext();
+  
+  // Handle navigation to specific stage
+  const handleStageClick = (stage: Stage) => {
+    if (isStageAccessible(stage)) {
+      setCurrentStage(stage);
+    }
+  };
   
   // Calculate overall progress
   const totalStages = STAGES.length;
@@ -56,13 +62,17 @@ export const Dashboard = () => {
           const isCurrent = progress.currentStage === stage;
           
           return (
-            <Card key={stage} className={`
-              ${isCompleted ? 'border-green-200 bg-green-50' : 
-                isCurrent ? 'border-idea-200 bg-idea-50' : 
-                isAccessible ? 'border-gray-200 hover:border-idea-200' : 
-                'border-gray-200 opacity-70'}
-              transition-all
-            `}>
+            <Card 
+              key={stage} 
+              className={`
+                ${isCompleted ? 'border-green-200 bg-green-50' : 
+                  isCurrent ? 'border-idea-200 bg-idea-50' : 
+                  isAccessible ? 'border-gray-200 hover:border-idea-200' : 
+                  'border-gray-200 opacity-70'}
+                transition-all cursor-pointer
+              `}
+              onClick={() => handleStageClick(stage)}
+            >
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
                   {isCompleted ? (

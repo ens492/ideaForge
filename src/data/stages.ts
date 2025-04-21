@@ -1,47 +1,59 @@
-
 import { Stage, StageContent } from "@/types";
 
-// Sample content for each stage of the Design Thinking and Lean Startup journey
 export const stageContent: Record<Stage, StageContent> = {
   understand: {
     title: "Understand the Problem Space",
-    description: "In this stage, you'll gain a deeper understanding of the problem space and context in which you'll be working. This foundational knowledge will inform all subsequent steps of your innovation journey.",
+    description: "In this stage, you'll gain a deeper understanding of the problem space through various analytical frameworks and tools.",
     videoUrl: "https://www.youtube.com/embed/d8qYf1FuHDg",
     articles: [
       {
         id: "article-1",
-        title: "Introduction to Design Thinking",
-        description: "Learn the basics of the Design Thinking methodology and why it matters.",
+        title: "Problem Framing Guide",
+        description: "Learn how to define problem boundaries and identify key assumptions.",
         url: "#",
-        type: "article"
+        type: "pdf"
       },
       {
         id: "article-2",
-        title: "Problem Framing Guide",
-        description: "How to properly identify and frame problems to be solved.",
+        title: "Stakeholder Mapping",
+        description: "Techniques for identifying and analyzing stakeholders.",
         url: "#",
-        type: "pdf"
+        type: "template"
+      },
+      {
+        id: "article-3",
+        title: "Jobs To Be Done Framework",
+        description: "Understanding user needs through the JTBD framework.",
+        url: "#",
+        type: "article"
       }
     ],
     reflectionQuestions: [
       {
         id: "understand-q1",
-        question: "What specific problem area are you interested in exploring?",
-        placeholder: "Describe the problem space that interests you...",
+        question: "What is your problem statement? Include context, boundaries, and key assumptions.",
+        placeholder: "Define the problem you're trying to solve...",
         type: "textarea",
         required: true
       },
       {
         id: "understand-q2",
-        question: "Why is this problem important to solve?",
-        placeholder: "Explain the significance of this problem...",
+        question: "Complete the 5W+H analysis for your problem space.",
+        placeholder: "Who is affected? What is the issue? Where does it occur? When does it happen? Why is it important? How does it manifest?",
         type: "textarea",
         required: true
       },
       {
         id: "understand-q3",
-        question: "What are your initial hypotheses about this problem?",
-        placeholder: "List your initial assumptions...",
+        question: "Describe your primary persona and their jobs to be done (functional, emotional, and social).",
+        placeholder: "Detail your user persona and their needs...",
+        type: "textarea",
+        required: true
+      },
+      {
+        id: "understand-q4",
+        question: "Map the value chain for your problem space. What are the key activities and gaps?",
+        placeholder: "List the sequence of activities and identify potential gaps...",
         type: "textarea",
         required: true
       }
@@ -49,14 +61,20 @@ export const stageContent: Record<Stage, StageContent> = {
     tasks: [
       {
         id: "understand-task1",
-        title: "Research the problem space",
-        description: "Spend at least 2 hours researching existing information about your problem space. Look for academic papers, articles, news, and existing solutions.",
+        title: "Create a Stakeholder Map",
+        description: "Identify all stakeholders and map their relationships and influence levels.",
         required: true
       },
       {
         id: "understand-task2",
-        title: "Identify key stakeholders",
-        description: "List all the people or groups who are affected by this problem or would be affected by potential solutions.",
+        title: "Develop Extreme User Profiles",
+        description: "Create profiles for at least 2 extreme users who might interact with your solution.",
+        required: true
+      },
+      {
+        id: "understand-task3",
+        title: "Complete Value Chain Analysis",
+        description: "Document the entire value chain, highlighting potential innovation opportunities.",
         required: true
       }
     ]
@@ -64,20 +82,27 @@ export const stageContent: Record<Stage, StageContent> = {
   
   observe: {
     title: "Observe and Empathize with Users",
-    description: "This stage focuses on building empathy with the people affected by the problem. You'll collect data through observations, interviews, and other research methods to understand user needs and pain points.",
+    description: "Apply various observation methods to gather deep insights about your users and their context.",
     videoUrl: "https://www.youtube.com/embed/EpYgQM4ZZmY",
     articles: [
       {
-        id: "article-3",
-        title: "Effective User Interview Techniques",
-        description: "How to conduct interviews that reveal valuable insights.",
+        id: "article-4",
+        title: "AEIOU Observation Method",
+        description: "A comprehensive framework for structured observations.",
+        url: "#",
+        type: "template"
+      },
+      {
+        id: "article-5",
+        title: "Creating Effective Empathy Maps",
+        description: "Guide to building insightful empathy maps.",
         url: "#",
         type: "article"
       },
       {
-        id: "article-4",
-        title: "Empathy Mapping Template",
-        description: "A template to organize your observations about users.",
+        id: "article-6",
+        title: "Customer Journey Mapping",
+        description: "Tools and templates for journey mapping.",
         url: "#",
         type: "template"
       }
@@ -85,22 +110,29 @@ export const stageContent: Record<Stage, StageContent> = {
     reflectionQuestions: [
       {
         id: "observe-q1",
-        question: "Who are the key users or stakeholders affected by this problem?",
-        placeholder: "Describe your primary user groups...",
+        question: "Document your AEIOU observations. What patterns emerged?",
+        placeholder: "Detail your observations about Activities, Environments, Interactions, Objects, and Users...",
         type: "textarea",
         required: true
       },
       {
         id: "observe-q2",
-        question: "What methods did you use to collect data about your users?",
-        placeholder: "Describe your research methods...",
+        question: "Create an empathy map for your primary user. What insights emerged about what they say, think, do, and feel?",
+        placeholder: "Document your empathy map findings...",
         type: "textarea",
         required: true
       },
       {
         id: "observe-q3",
-        question: "What key insights did you gain about your users' needs and pain points?",
-        placeholder: "List your most important findings...",
+        question: "What are the key insights from your customer journey map? Identify major pain points and opportunities.",
+        placeholder: "Describe the journey phases and key findings...",
+        type: "textarea",
+        required: true
+      },
+      {
+        id: "observe-q4",
+        question: "What emerging trends (market, behavior, technology) might impact your solution space?",
+        placeholder: "Analyze relevant trends and their implications...",
         type: "textarea",
         required: true
       }
@@ -108,14 +140,20 @@ export const stageContent: Record<Stage, StageContent> = {
     tasks: [
       {
         id: "observe-task1",
-        title: "Conduct user interviews",
-        description: "Interview at least 5 potential users or stakeholders to understand their experiences, needs, and frustrations.",
+        title: "Conduct Shadowing Sessions",
+        description: "Shadow at least 3 potential users and document their behaviors and context.",
         required: true
       },
       {
         id: "observe-task2",
-        title: "Create an empathy map",
-        description: "Organize your observations into an empathy map that captures what users say, do, think, and feel.",
+        title: "Complete Observation Grid",
+        description: "Use the observation grid template to record and analyze user behaviors over time.",
+        required: true
+      },
+      {
+        id: "observe-task3",
+        title: "Facilitate Peer Observation",
+        description: "Organize and document a peer observation session with at least 2 participants.",
         required: true
       }
     ]
