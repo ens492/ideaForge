@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { AppProvider } from "@/context/AppContext";
 import { STAGES, Stage } from "@/types";
@@ -18,8 +18,23 @@ const MainView = () => {
   // When the current stage changes in the context, update our local state
   if (activeStage !== currentStage) {
     setActiveStage(currentStage);
-    setView('journey');
   }
+
+  // Listen for the custom switchToJourney event
+  useEffect(() => {
+    const handleSwitchToJourney = (event: CustomEvent<Stage>) => {
+      setView('journey');
+      if (event.detail) {
+        setActiveStage(event.detail);
+      }
+    };
+
+    window.addEventListener('switchToJourney', handleSwitchToJourney as EventListener);
+    
+    return () => {
+      window.removeEventListener('switchToJourney', handleSwitchToJourney as EventListener);
+    };
+  }, []);
 
   return (
     <div className="space-y-8">

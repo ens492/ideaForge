@@ -1,3 +1,4 @@
+
 import { useAppContext } from "@/context/AppContext";
 import { STAGES, STAGE_NAMES, Stage } from "@/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -43,7 +44,12 @@ export const Dashboard = () => {
               
               <div className="mt-4">
                 <Button 
-                  onClick={() => setCurrentStage(progress.currentStage)}
+                  onClick={() => {
+                    setCurrentStage(progress.currentStage);
+                    // Force view to switch to journey instead of just setting the stage
+                    const event = new CustomEvent('switchToJourney', { detail: progress.currentStage });
+                    window.dispatchEvent(event);
+                  }}
                   className="w-full bg-idea-600 hover:bg-idea-700"
                 >
                   Continue from {STAGE_NAMES[progress.currentStage]}
@@ -71,7 +77,14 @@ export const Dashboard = () => {
                   'border-gray-200 opacity-70'}
                 transition-all cursor-pointer
               `}
-              onClick={() => handleStageClick(stage)}
+              onClick={() => {
+                if (isAccessible) {
+                  setCurrentStage(stage);
+                  // Force view to switch to journey instead of just setting the stage
+                  const event = new CustomEvent('switchToJourney', { detail: stage });
+                  window.dispatchEvent(event);
+                }
+              }}
             >
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
@@ -93,7 +106,15 @@ export const Dashboard = () => {
               </CardHeader>
               <CardContent className="pb-4">
                 <Button 
-                  onClick={() => isAccessible && setCurrentStage(stage)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent double triggering with card click
+                    if (isAccessible) {
+                      setCurrentStage(stage);
+                      // Force view to switch to journey instead of just setting the stage
+                      const event = new CustomEvent('switchToJourney', { detail: stage });
+                      window.dispatchEvent(event);
+                    }
+                  }}
                   disabled={!isAccessible}
                   variant={isCompleted ? "outline" : "default"}
                   className={isCompleted ? "border-green-200 text-green-800 hover:bg-green-100" : 
