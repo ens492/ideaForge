@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { STAGES, STAGE_NAMES, STAGE_DESCRIPTIONS, Stage } from "@/types";
@@ -24,7 +25,7 @@ interface JourneyStagesProps {
 }
 
 export const JourneyStages = ({ selectedStage, setSelectedStage }: JourneyStagesProps) => {
-  const { progress, currentStage } = useAppContext();
+  const { progress, currentStage, isStageCompleted, isStageAccessible } = useAppContext();
   
   useEffect(() => {
     const handleSwitchToJourney = (event: CustomEvent) => {
