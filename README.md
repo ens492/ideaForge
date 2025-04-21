@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
 
-## Project info
+# Idea Forge AI Mentor
 
-**URL**: https://lovable.dev/projects/4260f964-ec55-49f5-b68c-94e67788924a
+A full-stack, responsive web application designed to assist entrepreneurs, university students, and innovation teams in decision-making under uncertainty. This platform guides users through structured Design Thinking and Lean Startup processes, integrating AI feedback to help validate hypotheses and iteratively improve entrepreneurial ideas.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+### Core Functionality
 
-**Use Lovable**
+1. **Step-by-Step Learning Journey**:
+   - 7 sequential stages based on Design Thinking methodology
+   - Structured progression requiring completion of each step
+   - Embedded educational content, reflection questions, and hands-on tasks
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4260f964-ec55-49f5-b68c-94e67788924a) and start prompting.
+2. **AI Feedback System**:
+   - Provides positive and constructive feedback on user submissions
+   - Suggests tailored learning resources and next steps
+   - Enables iterative improvement of ideas
 
-Changes made via Lovable will be committed automatically to this repo.
+3. **Business Model Validation**:
+   - Tools for testing and refining business hypotheses
+   - Business Model Canvas integration
+   - Exportable business model documentation
 
-**Use your preferred IDE**
+4. **User Experience**:
+   - Responsive design for desktop and mobile
+   - Progress tracking and visualization
+   - Interactive dashboard
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Technology Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend**: React.js with TypeScript, Tailwind CSS, Shadcn UI components
+- **State Management**: React Context API with localStorage persistence
+- **AI Feedback**: Simulated AI responses (ready for integration with GPT-4 or other LLMs)
 
-Follow these steps:
+## Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+4. Open http://localhost:8080 in your browser
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Application Structure
 
-# Step 3: Install the necessary dependencies.
-npm i
+The application follows a modular component architecture:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+- `src/components/stages/`: Components for each stage of the journey
+- `src/components/layout/`: Layout components like MainLayout and Navbar
+- `src/components/dashboard/`: Dashboard and welcome components
+- `src/components/business/`: Business modeling tools
+- `src/context/`: Application state management
+- `src/services/`: Services for AI feedback
+- `src/types/`: TypeScript type definitions
+- `src/data/`: Content and data for the application
 
-**Edit a file directly in GitHub**
+## Design Thinking & Lean Startup Integration
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+This platform integrates Design Thinking's human-centered approach with Lean Startup's validation methodology:
 
-**Use GitHub Codespaces**
+1. **Understand** → Research and empathize with user needs
+2. **Observe** → Collect user insights and data
+3. **Define** → Create a clear problem statement
+4. **Ideate** → Generate potential solutions
+5. **Prototype** → Build testable representations (Build phase of Build-Measure-Learn)
+6. **Test** → Validate with users (Measure phase of Build-Measure-Learn)
+7. **Reflect** → Review and iterate (Learn phase of Build-Measure-Learn)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## AI Feedback System
 
-## What technologies are used for this project?
+The feedback system is designed to:
 
-This project is built with:
+1. Analyze user submissions for each stage
+2. Provide constructive feedback highlighting strengths and areas for improvement
+3. Suggest relevant resources based on user needs
+4. Approve progression or guide iteration based on submission quality
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Future Enhancements
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/4260f964-ec55-49f5-b68c-94e67788924a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Team Collaboration**: Enable multiple users to work on the same project
+- **Custom Innovation Paths**: Tailor the journey for different user personas
+- **Extended Resource Library**: Expanded educational content and templates
+- **Real AI Integration**: Connect to OpenAI or other LLM providers for genuine AI feedback
