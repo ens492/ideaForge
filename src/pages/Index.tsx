@@ -1,7 +1,7 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/layout/Footer";
+import { LogIn, UserPlus } from "lucide-react";
 
 export default function Index() {
   return (
@@ -23,11 +23,24 @@ export default function Index() {
                       IdeaForge guides you through your entrepreneurial journey using AI and design thinking.
                     </p>
                     <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
-                      <Button asChild size="lg" className="bg-idea-600 hover:bg-idea-700">
-                        <Link to="/signup">Get Started</Link>
+                      <Button 
+                        asChild 
+                        size="lg" 
+                        className="bg-idea-600 hover:bg-idea-700 flex items-center gap-2"
+                      >
+                        <Link to="/signup">
+                          <UserPlus className="mr-2" /> Get Started
+                        </Link>
                       </Button>
-                      <Button asChild variant="outline" size="lg">
-                        <Link to="/login">Already have an account?</Link>
+                      <Button 
+                        asChild 
+                        variant="outline" 
+                        size="lg" 
+                        className="flex items-center gap-2"
+                      >
+                        <Link to="/login">
+                          <LogIn className="mr-2" /> Log In
+                        </Link>
                       </Button>
                     </div>
                   </div>
