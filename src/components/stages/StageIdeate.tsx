@@ -28,6 +28,32 @@ type IdeateFormValues = {
   competitionStatement: string;
 };
 
+// Helper function to transform IdeateFormValues to Record<string, string>
+const transformToStringRecord = (data: IdeateFormValues): Record<string, string> => {
+  return {
+    ideas: JSON.stringify(data.ideas),
+    selectedIdeaIndex: data.selectedIdeaIndex.toString(),
+    needStatement: data.needStatement,
+    approachStatement: data.approachStatement,
+    benefitStatement: data.benefitStatement,
+    competitionStatement: data.competitionStatement,
+  };
+};
+
+// Helper function to parse string record back to IdeateFormValues
+const parseFromStringRecord = (data: Record<string, string> | undefined): Partial<IdeateFormValues> => {
+  if (!data) return {};
+  
+  return {
+    ideas: data.ideas ? JSON.parse(data.ideas) as IdeaItem[] : [],
+    selectedIdeaIndex: data.selectedIdeaIndex ? parseInt(data.selectedIdeaIndex, 10) : 0,
+    needStatement: data.needStatement || "",
+    approachStatement: data.approachStatement || "",
+    benefitStatement: data.benefitStatement || "",
+    competitionStatement: data.competitionStatement || "",
+  };
+};
+
 export const StageIdeate: React.FC = () => {
   const { progress, updateSubmission, submitForFeedback, completeStage } = useAppContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,11 +66,11 @@ export const StageIdeate: React.FC = () => {
 
   // Initialize form with saved values or defaults
   const ideateSubmission = progress.submissions.ideate;
-  const savedValues = ideateSubmission?.answers || {};
+  const savedValues = parseFromStringRecord(ideateSubmission?.answers);
 
   const defaultValues: IdeateFormValues = {
     ideas: savedValues.ideas || [{ title: "", benefit: "", uniqueness: "", risk: "" }],
-    selectedIdeaIndex: savedValues.selectedIdeaIndex || 0,
+    selectedIdeaIndex: savedValues.selectedIdeaIndex ?? 0,
     needStatement: savedValues.needStatement || "",
     approachStatement: savedValues.approachStatement || "",
     benefitStatement: savedValues.benefitStatement || "",
@@ -90,7 +116,7 @@ export const StageIdeate: React.FC = () => {
   const saveDraft = (data: IdeateFormValues) => {
     updateSubmission("ideate", {
       stageId: "ideate",
-      answers: data,
+      answers: transformToStringRecord(data),
       completed: false,
     });
     toast.success("Draft saved successfully!");
@@ -124,7 +150,7 @@ export const StageIdeate: React.FC = () => {
     // Save the submission
     updateSubmission("ideate", {
       stageId: "ideate",
-      answers: data,
+      answers: transformToStringRecord(data),
       completed: false,
     });
 
