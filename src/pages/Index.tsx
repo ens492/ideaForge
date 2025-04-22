@@ -1,14 +1,17 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/layout/Footer";
-import { LogIn, UserPlus } from "lucide-react";
+import { Header } from "@/components/layout/Header";
+import { LogIn, UserPlus, ArrowRight } from "lucide-react";
 
 export default function Index() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-white">
+        <section className="relative overflow-hidden bg-white pt-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative z-10 pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-28">
               <div className="mx-auto max-w-7xl lg:px-8">
@@ -28,18 +31,8 @@ export default function Index() {
                         size="lg" 
                         className="bg-idea-600 hover:bg-idea-700 flex items-center gap-2"
                       >
-                        <Link to="/signup">
-                          <UserPlus className="mr-2" /> Get Started
-                        </Link>
-                      </Button>
-                      <Button 
-                        asChild 
-                        variant="outline" 
-                        size="lg" 
-                        className="flex items-center gap-2"
-                      >
-                        <Link to="/login">
-                          <LogIn className="mr-2" /> Log In
+                        <Link to="/journey">
+                          Explore Our Process <ArrowRight className="ml-2" />
                         </Link>
                       </Button>
                     </div>
@@ -73,33 +66,87 @@ export default function Index() {
 
             <div className="mt-16 grid gap-8 md:grid-cols-3">
               {/* Feature 1 */}
-              <div className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <div className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-12 w-12 rounded-lg bg-idea-100 flex items-center justify-center mb-5">
+                  <span className="text-2xl text-idea-600">1</span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   Guided Journey
                 </h3>
                 <p className="text-gray-600">
-                  Step-by-step progression through proven innovation methodologies.
+                  Step-by-step progression through proven innovation methodologies, designed to help you succeed.
                 </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <div className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-12 w-12 rounded-lg bg-idea-100 flex items-center justify-center mb-5">
+                  <span className="text-2xl text-idea-600">2</span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   AI Feedback
                 </h3>
                 <p className="text-gray-600">
-                  Receive intelligent insights and suggestions to refine your ideas.
+                  Receive intelligent insights and suggestions to refine your ideas and make better decisions.
                 </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <div className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-12 w-12 rounded-lg bg-idea-100 flex items-center justify-center mb-5">
+                  <span className="text-2xl text-idea-600">3</span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   Track Progress
                 </h3>
                 <p className="text-gray-600">
-                  Monitor your development with clear milestones and achievements.
+                  Monitor your development with clear milestones and achievements. Stay motivated and focused.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-16">How IdeaForge Works</h2>
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="space-y-8">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-idea-100 flex items-center justify-center">
+                    <span className="text-idea-600 font-semibold">1</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-xl mb-2">Define Your Challenge</h3>
+                    <p className="text-gray-600">Start by clearly articulating the problem you want to solve.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-idea-100 flex items-center justify-center">
+                    <span className="text-idea-600 font-semibold">2</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-xl mb-2">Generate Ideas</h3>
+                    <p className="text-gray-600">Use our AI-powered tools to brainstorm and develop innovative solutions.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-idea-100 flex items-center justify-center">
+                    <span className="text-idea-600 font-semibold">3</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-xl mb-2">Validate & Refine</h3>
+                    <p className="text-gray-600">Get feedback and iterate on your ideas to make them stronger.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+                  alt="Process visualization"
+                  className="rounded-lg shadow-xl"
+                />
               </div>
             </div>
           </div>
