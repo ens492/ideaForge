@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/layout/Footer";
@@ -47,6 +46,46 @@ export default function Index() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Startups Fail Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+              <div className="mb-10 lg:mb-0">
+                <h2 className="text-3xl font-semibold text-gray-900 mb-6 font-serif">
+                  Why Most Startups Fail – and How to Avoid It
+                </h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  The majority of startups fail not because the idea is bad — but because there's no clear plan.
+                </p>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  At IdeaForge, we help you structure your thoughts, validate your assumptions, and build with purpose.
+                </p>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Powered by design thinking and real-time AI feedback, our platform ensures you move forward step by step — with clarity and confidence.
+                </p>
+                <Button 
+                  asChild 
+                  variant="outline" 
+                  size="lg" 
+                  className="mt-8 border-idea-600 text-idea-600 hover:bg-idea-50"
+                >
+                  <Link to="/journey">
+                    Start Your Journey
+                  </Link>
+                </Button>
+              </div>
+              <div className="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+                  alt="Team analyzing business strategy"
+                  className="rounded-xl shadow-xl object-cover w-full h-[500px]"
+                />
+                <div className="absolute inset-0 bg-idea-600/10 rounded-xl"></div>
               </div>
             </div>
           </div>
